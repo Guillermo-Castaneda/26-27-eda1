@@ -35,7 +35,20 @@ public class SimulacionFila {
                 if (size(fila) >= 30 && aleatorio.nextBoolean()) {
                     personasDesistidas++;
                 } else {
-                    fila.add(new Persona(minuto, false));
+                    boolean esPreferente = aleatorio.nextDouble() < 0.15;
+                    Persona nueva = new Persona(minuto, esPreferente);
+
+                    if (minuto >= 20 && esPreferente) {
+                        int posicion = 0;
+                        for (int indice = 0; indice < size(fila); indice++) {
+                            if (fila.get(indice).preferente) {
+                                posicion = indice + 1;
+                            }
+                        }
+                        fila.add(posicion, nueva);
+                    } else {
+                        fila.add(nueva);
+                    }
                 }
             }
 
