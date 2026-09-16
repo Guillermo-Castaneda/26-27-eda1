@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SimulacionFila {
 
@@ -22,7 +23,16 @@ public class SimulacionFila {
     }
 
     public static void main(String[] argumentos) {
+        Random aleatorio = new Random();
         List<Persona> fila = new ArrayList<>();
-        System.out.println("Fila inicializada con size: " + size(fila));
+
+        for (int minuto = 1; minuto <= 120; minuto++) {
+
+            if (aleatorio.nextDouble() < 0.6) {
+                fila.add(new Persona(minuto, false));
+            }
+
+            System.out.println("Minuto " + minuto + " - Longitud de la fila: " + size(fila) + " metros (" + size(fila) + " personas)");
+        }
     }
 }
