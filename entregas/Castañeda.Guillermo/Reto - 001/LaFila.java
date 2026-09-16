@@ -52,6 +52,23 @@ public class SimulacionFila {
                 }
             }
 
+            if (minuto >= 20) {
+
+                if (!estaVacia(fila) && aleatorio.nextDouble() < 0.1) {
+                    if (!(size(fila) >= 30 && aleatorio.nextBoolean())) {
+                        int posicionConocido = aleatorio.nextInt(size(fila));
+                        fila.add(posicionConocido + 1, new Persona(minuto, false));
+                    } else {
+                        personasDesistidas++;
+                    }
+                }
+
+                if (size(fila) >= 2 && aleatorio.nextDouble() < 0.05) {
+                    int posicion = aleatorio.nextInt(size(fila));
+                    fila.remove(posicion);
+                }
+            }
+
             if (aleatorio.nextDouble() < 0.4 && !estaVacia(fila)) {
                 fila.remove(0);
                 personasAtendidas++;
