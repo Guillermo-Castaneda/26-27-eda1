@@ -26,13 +26,24 @@ public class SimulacionFila {
         Random aleatorio = new Random();
         List<Persona> fila = new ArrayList<>();
 
+        int personasAtendidas = 0;
+
         for (int minuto = 1; minuto <= 120; minuto++) {
 
             if (aleatorio.nextDouble() < 0.6) {
                 fila.add(new Persona(minuto, false));
             }
 
+            if (aleatorio.nextDouble() < 0.4 && !estaVacia(fila)) {
+                fila.remove(0);
+                personasAtendidas++;
+            }
+
             System.out.println("Minuto " + minuto + " - Longitud de la fila: " + size(fila) + " metros (" + size(fila) + " personas)");
         }
+
+        System.out.println("\n--- RESUMEN DE LA SIMULACION ---");
+        System.out.println("Personas atendidas: " + personasAtendidas);
+        System.out.println("Personas en fila al cierre: " + size(fila));
     }
 }
